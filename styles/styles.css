@@ -39,6 +39,7 @@
 }
 
 #main {
+    width: 100%;
 	position: absolute;
 }
 
@@ -111,7 +112,6 @@ h3 {
 }
 
 @media(min-width: 768px) {
-
 	.menuIconContainer {
 		height: 60px;
 	}
