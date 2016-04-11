@@ -18,29 +18,35 @@
 		<!-- sidebar -->
 		<div id="sidebarWrapper">
 			<div class="sidebarContainer">
-				<ul>
-					<li>Chase Bank</li>
-					<li>Safeway</li>
-					<li>Chevron Gas Station</li>
-					<li>Great Mall</li>
-					<li>Bart Station</li>
-					<li>VTA Station</li>
+				<div class="input-group">
+			      	<input type="text" class="form-control" placeholder="Search for..." data-bind="textInput: inputString, event: { keyup: filterPlaces }">
+		    	  	<span class="input-group-btn">
+		        		<button class="btn btn-default" type="button">Filter</button>
+			      	</span>
+		    	</div><!-- /input-group -->
+
+				<ul class="placesList" data-bind="foreach: locations">
+					<li class="place" data-bind="text: name"></li>
 				</ul>
 			</div> <!-- .sidebarContainer -->
 		</div>  <!-- .sidebarWrapper -->
 
 		<div id="main">
-		    <div class="menuIconContainer">
-		    	<!-- http://webdesign.tutsplus.com/tutorials/7-non-raster-approaches-for-making-the-hamburger-menu-icon--cms-21686 -->
-		    	<span class="menuIcon">☰</span>
-		    	<h3 class="text-center mainTitle">Neighborhood Map - San Jose, California</h3>
-		    </div>
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="menuIconContainer col-lg-12">
+				    	<!-- http://webdesign.tutsplus.com/tutorials/7-non-raster-approaches-for-making-the-hamburger-menu-icon--cms-21686 -->
+				    	<span class="menuIcon">☰</span>
+				    	<h3 class="text-center mainTitle">Neighborhood Map - San Jose, California</h3>
+				    </div>
+				</div>
 
+				<div class="row">
+					<div class="col-lg-12" id="mapHolder">
+						<div id="map"></div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -48,12 +54,13 @@
 	<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="scripts/libs/knockout-3.4.0.js" defer></script>
-
+	<script src="scripts/js/app.js" defer></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAsmUc_AC1I3AKp8VXJQBeDcFDqRcaxIE&callback=initializeMap"></script>
     <script defer>
-    $(".menuIcon").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+	    $(".menuIcon").click(function(e) {
+	        e.preventDefault();
+	        $("#wrapper").toggleClass("toggled");
+	    });
     </script>
 </body>
 </html>

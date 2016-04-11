@@ -4,19 +4,21 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    height: 100%;
+    width: 100%;
 }
 
 #wrapper.toggled {
-	padding-left: 250px;
+	padding-left: 200px;
 }
 
 #sidebarWrapper {
 	z-index: 1000;
 	position: fixed;
-	left: 250px;
+	left: 200px;
 	width: 0;
 	height: 100%;
-	margin-left: -250px;
+	margin-left: -200px;
 	overflow-y: auto;
 	background: #000;
     -webkit-transition: all 0.5s ease;
@@ -26,26 +28,46 @@
 }
 
 #wrapper.toggled #sidebarWrapper{
-	width: 250px;
+	width: 200px;
 }
 
 .sidebarContainer {
 	position: absolute;
 	top: 0;
-	width: 250px;
+	width: 200px;
 	margin: 0;
 	padding: 0;
 	color: #fff;
 }
 
+.input-group {
+	padding: 5px 5px 10px 5px;
+}
+
+.placesList {
+	list-style-type: none;
+	/*border: 1px solid yellow;*/
+	padding: 5px;
+}
+
+.place {
+	margin: 0;
+	font-size: 14px;
+	padding: 10px 10px 0 0;
+	height: 40px;
+	border-bottom: 1px solid grey;
+}
+
 #main {
     width: 100%;
 	position: absolute;
+	border: 1px solid green;
+	background-color: yellow;
 }
 
 #wrapper.toggled #main {
     position: absolute;
-    margin-right: -250px;
+    margin-right: -200px;
 }
 
 .menuIconContainer {
@@ -56,21 +78,39 @@
 }
 
 .menuIcon {
-	font-size: 20px;
+	font-size: 18px;
 	margin: 0;
-	padding-left: 16px;
+	padding: 0;
 }
 
 h3 {
-	font-size: 16px;
+	font-size: 12px;
 	margin: 0;
 	margin-bottom: 0;
 	float: right;
-	width: 90%;
-	padding-top: 5px;
+	width: 80%;
+	padding-top: 8px;
 }
 
-@media(min-width: 911px){
+#mapHolder {
+	position: fixed;
+	/*bottom: 0;*/
+	border: 2px solid red;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#map {
+	border: 2px solid blue;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+@media(min-width: 768px) {
 	#wrapper {
 		padding-left: 250px;
 	}
@@ -87,33 +127,42 @@ h3 {
 		width: 0;
 	}
 
+	.sidebarContainer {
+		width: 250px;
+	}
+
 	#main {
 		position: relative;
+		height: 100%;
 	}
 
     #wrapper.toggled #main {
         position: relative;
-        margin-right: 0;
+     	margin-right: 0;
     }
 
+	.place {
+		font-size: 20px;
+		height: 60px;
+		padding: 15px 0 10px 5px;
+	}
+
 	.menuIconContainer {
-		height: 50px;
-		/*padding-left: 20px;*/
+		height: 40px;
 	}
 
 	.menuIcon {
-		font-size: 36px;
+		font-size: 24px;
 	}
 
 	h3 {
-		font-size: 30px;
-		margin-top: 5px;
+		font-size: 20px;
 	}
 }
 
-@media(min-width: 768px) {
+@media(min-width: 911px){
 	.menuIconContainer {
-		height: 60px;
+		height: 50px;
 	}
 
 	.menuIcon {
@@ -121,6 +170,7 @@ h3 {
 	}
 
 	h3 {
-		font-size: 30px;
+		font-size: 26px;
+		margin-top: 5px;
 	}
 }
