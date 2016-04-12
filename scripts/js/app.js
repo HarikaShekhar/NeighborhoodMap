@@ -6,7 +6,7 @@ var places = {
 			"lat": 37.399072,
 			"lng": -121.920731
 		},
-		"zoom": 11,
+		"zoom": 11
 		// "mapTypeControl": false
 	},
 	"mapPlaces": [
@@ -17,6 +17,7 @@ var places = {
 				"lat": 37.397928,
 				"lng": -121.924195
 			},
+			"icon": "http://maps.google.com/mapfiles/kml/pal2/icon53.png"
 		},
 		{
 			"address": "Rivermark Village, 3970 Rivermark Plaza, Santa Clara, CA 95054",
@@ -24,7 +25,8 @@ var places = {
 			"coordinates": {
 				"lat": 37.394924,
 				"lng": -121.947680
-			}
+			},
+			"icon": "http://maps.google.com/mapfiles/kml/pal3/icon18.png"
 		},
 		{
 			"address": "790 Montague Expy, San Jose, CA 95131",
@@ -32,7 +34,8 @@ var places = {
 			"coordinates": {
 				"lat": 37.397866,
 				"lng": -121.912859
-			}
+			},
+			"icon": "http://maps.google.com/mapfiles/kml/pal2/icon21.png"
 		},
 		{
 			"address": "447 Great Mall Dr, Milpitas, CA 95035",
@@ -40,7 +43,8 @@ var places = {
 			"coordinates": {
 				"lat": 37.415980,
 				"lng": -121.897477
-			}
+			},
+			"icon": "http://maps.google.com/mapfiles/kml/pal3/icon21.png"
 		},
 		{
 			"address": "2000 Bart Way, Fremont, CA 94536",
@@ -48,7 +52,8 @@ var places = {
 			"coordinates": {
 				"lat": 37.557640,
 				"lng": -121.976600
-			}
+			},
+			"icon": "http://maps.google.com/mapfiles/ms/micons/rail.png"
 		},
 		{
 			"address": "3331 N 1st St, San Jose, CA 95134",
@@ -56,7 +61,8 @@ var places = {
 			"coordinates": {
 				"lat": 37.400609,
 				"lng": -121.940208
-			}
+			},
+			"icon": "http://maps.google.com/mapfiles/ms/micons/tram.png"
 		}
 	]
 };
@@ -90,7 +96,8 @@ var MapViewModel = function(map) {
 				map: place.map,
 				position: place.coordinates,
 				animation: google.maps.Animation.DROP,
-		        title: place.name
+		        title: place.name,
+		        icon: place.icon
 			});
 
 			self.markers.push(place.marker);
@@ -103,8 +110,6 @@ var MapViewModel = function(map) {
 	     	place.marker.addListener('click', function() {
 		        self.displayPlaceInfo(place);
 		    });
-
-
 		});
 
         // fit the map to the new marker
