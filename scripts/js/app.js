@@ -141,7 +141,17 @@ var MapViewModel = function(map) {
 			self.locations().push(place);
 		});
 
-		// self.addMapMarkers();
+		self.bounds = new google.maps.LatLngBounds();;
+		self.locations().forEach(function(place){
+			self.bounds.extend(new google.maps.LatLng(place.coordinates));
+			place.clicked(false);
+			place.marker.setAnimation(null);
+		});
+
+        // fit the map to the new marker
+	    self.map.fitBounds(self.bounds);
+	    // center the map
+	    self.map.setCenter(self.bounds.getCenter());
 	};
 
 	self.toggleBounce = function(marker) {
@@ -172,6 +182,8 @@ var MapViewModel = function(map) {
 		} else {
 			selectedPlace.clicked(true);
 		}
+
+		selectedPlace.map.panTo(selectedPlace.coordinates);
 	};
 
 };
