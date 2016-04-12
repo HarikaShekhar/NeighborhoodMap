@@ -19,14 +19,14 @@
 		<div id="sidebarWrapper">
 			<div class="sidebarContainer">
 				<div class="input-group">
-			      	<input type="text" class="form-control" placeholder="Search for..." data-bind="textInput: inputString, event: { keyup: filterPlaces }">
+			      	<input type="text" class="form-control" placeholder="Search for..." data-bind="textInput: inputString" autofocus="true">
 		    	  	<span class="input-group-btn">
-		        		<button class="btn btn-default" type="button">Filter</button>
+		        		<button class="btn btn-default" type="button" data-bind="click: resetFilter">Reset</button>
 			      	</span>
 		    	</div><!-- /input-group -->
 
 				<ul class="placesList" data-bind="foreach: locations">
-					<li class="place" data-bind="text: name"></li>
+					<li class="place" data-bind="text: name, click: $parent.displayPlaceInfo, css: { highlight: clicked }"></li>
 				</ul>
 			</div> <!-- .sidebarContainer -->
 		</div>  <!-- .sidebarWrapper -->
@@ -60,6 +60,11 @@
 	    $(".menuIcon").click(function(e) {
 	        e.preventDefault();
 	        $("#wrapper").toggleClass("toggled");
+	        $('input').focus();
+	    });
+
+	    $('button').click(function(){
+	    	$('input').focus();
 	    });
     </script>
 </body>

@@ -58,6 +58,10 @@
 	border-bottom: 1px solid grey;
 }
 
+.highlight {
+	color: #5ee4f4;
+}
+
 #main {
     width: 100%;
 	position: absolute;

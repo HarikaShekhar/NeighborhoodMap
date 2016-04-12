@@ -72,13 +72,15 @@ var MapViewModel = function(map) {
 	self.map = map;
 	self.inputString = ko.observable('');
 	self.locations = ko.observableArray([]);
+	self.markers = [];
 
 	places.mapPlaces.forEach(function(place) {
+		place.clicked = ko.observable(false);
 		self.locations().push(place);
 	});
 
 	self.bounds = new google.maps.LatLngBounds();
-	console.log(self.bounds);
+
 
 	self.addMapMarkers = function() {
 		self.locations().forEach(function(place) {
@@ -90,13 +92,16 @@ var MapViewModel = function(map) {
 				animation: google.maps.Animation.DROP,
 		        title: place.name
 			});
+
+			self.markers.push(place.marker);
+
 		    // this is where the pin actually gets added to the map.
 		    // bounds.extend() takes in a map location object
 		    self.bounds.extend(new google.maps.LatLng(place.coordinates));
 		    // place.marker.setMap(place.map);
 
 	     	place.marker.addListener('click', function() {
-		        self.selectPlace(place);
+		        self.displayPlaceInfo(place);
 		    });
 
 
@@ -110,16 +115,63 @@ var MapViewModel = function(map) {
 
 	self.addMapMarkers();
 
+	self.filterPlaces = function(value) {
+		self.locations.removeAll();
+		self.markers.forEach(function(marker){
+			marker.setMap(null);
+		});
 
+		self.markers = [];
 
-	    // this is where the pin actually gets added to the map.
-    // bounds.extend() takes in a map location object
+		var filterString = self.inputString().toLowerCase();
+		places.mapPlaces.forEach(function(place){
+			if (place.name.toLowerCase().indexOf(filterString) >= 0) {
+				self.locations.push(place);
+			}
+		});
 
+		self.addMapMarkers();
+	};
 
+	self.inputString.subscribe(self.filterPlaces);
 
+	self.resetFilter = function() {
+		self.inputString('');
+		places.mapPlaces.forEach(function(place) {
+			self.locations().push(place);
+		});
 
-	self.filterPlaces = function() {
+		// self.addMapMarkers();
+	};
 
+	self.toggleBounce = function(marker) {
+	    if (marker.getAnimation() !== null) {
+	    	marker.setAnimation(null);
+	    } else {
+	    	marker.setAnimation(google.maps.Animation.BOUNCE);
+	  	}
+	};
+
+	self.displayPlaceInfo = function(selectedPlace) {
+		self.markers.forEach(function(marker){
+			if (marker != selectedPlace.marker) {
+				marker.setAnimation(null);
+			}
+		});
+
+		self.toggleBounce(selectedPlace.marker);
+
+		self.locations().forEach(function(place){
+			if (place != selectedPlace && place.clicked(true)) {
+				place.clicked(false);
+			}
+		});
+
+		if (selectedPlace.clicked() == true) {
+			selectedPlace.clicked(false)
+		} else {
+			selectedPlace.clicked(true);
+		}
 	};
 
 };
