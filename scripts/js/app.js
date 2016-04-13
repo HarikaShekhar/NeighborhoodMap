@@ -164,6 +164,7 @@ var MapViewModel = function(map) {
 			self.bounds.extend(new google.maps.LatLng(place.coordinates));
 			place.clicked(false);
 			place.marker.setAnimation(null);
+			place.infowindow.close();
 		});
 
         // fit the map to the new marker
