@@ -113,9 +113,10 @@ var MapViewModel = function(map) {
 				content: "<div id='content'>" +
 						 "<h1 id='heading'>" + place.name + "</h1>" +
 						 "<div id='description'>Click the button for Yelp Reviews about " + place.name +
-						 "<br/><button type='button' class='btn btn-danger' id='yelpButton'>Yelp!</button>" +
+						 "<br/><input type='image' src='images/yelp_review_btn_red.png' name='yelpReviews' id='yelpReviews'/>" +
 						 "</div>" + //#description ends here
-						 "</div>" //#content ends here
+						 "</div>", //#content ends here
+				maxWidth: 300
 			});
 
 	     	place.marker.addListener('click', function() {

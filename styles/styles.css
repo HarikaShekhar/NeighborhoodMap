@@ -60,6 +60,7 @@
 
 .highlight {
 	color: #5ee4f4;
+	background-color: grey;
 }
 
 #main {
@@ -114,6 +115,7 @@ h3 {
 	margin: 0;
 	padding: 0;
 }
+
 @media(min-width: 768px) {
 	#wrapper {
 		padding-left: 250px;
