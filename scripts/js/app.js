@@ -65,6 +65,7 @@ var places = {
 			"icon": "http://maps.google.com/mapfiles/ms/micons/tram.png"
 		}
 	]
+
 };
 
 var initializeMap = function() {
@@ -107,8 +108,19 @@ var MapViewModel = function(map) {
 		    self.bounds.extend(new google.maps.LatLng(place.coordinates));
 		    // place.marker.setMap(place.map);
 
+
+			place.infowindow = new google.maps.InfoWindow({
+				content: "<div id='content'>" +
+						 "<h1 id='heading'>" + place.name + "</h1>" +
+						 "<div id='description'>Click the button for Yelp Reviews about " + place.name +
+						 "<br/><button type='button' class='btn btn-danger' id='yelpButton'>Yelp!</button>" +
+						 "</div>" + //#description ends here
+						 "</div>" //#content ends here
+			});
+
 	     	place.marker.addListener('click', function() {
 		        self.displayPlaceInfo(place);
+		        // place.infowindow.open(place.map, place.marker);
 		    });
 		});
 
@@ -179,16 +191,33 @@ var MapViewModel = function(map) {
 		self.locations().forEach(function(place){
 			if (place != selectedPlace && place.clicked(true)) {
 				place.clicked(false);
+				place.infowindow.close();
 			}
 		});
 
 		if (selectedPlace.clicked() == true) {
-			selectedPlace.clicked(false)
+			selectedPlace.clicked(false);
+			selectedPlace.infowindow.close();
 		} else {
 			selectedPlace.clicked(true);
+			selectedPlace.infowindow.open(selectedPlace.map, selectedPlace.marker);
 		}
+
+	    selectedPlace.infowindow.addListener('closeclick', function() {
+	      selectedPlace.clicked(false);
+	      selectedPlace.marker.setAnimation(null);
+	    });
 
 		selectedPlace.map.panTo(selectedPlace.coordinates);
 	};
 
 };
+
+// TODO
+// 1. Sort the list alphabetically
+// 2. Small devices: Check the navbar
+// 3. Yelp reviews on bootstrap modal
+// 4. Infowindow
+// 5. autocomplete search
+// 6. Check flights API
+// 7. Add category for filter search
