@@ -81,6 +81,18 @@ var MapViewModel = function(map) {
 	self.locations = ko.observableArray([]);
 	self.markers = [];
 
+	self.compare = function(a,b) {
+	  if (a.name < b.name)
+	    return -1;
+	  else if (a.name > b.name)
+	    return 1;
+	  else
+	    return 0;
+	};
+
+	places.mapPlaces.sort(self.compare);
+
+	// places.mapPlaces.sort();
 	places.mapPlaces.forEach(function(place) {
 		place.clicked = ko.observable(false);
 		self.locations().push(place);
@@ -113,7 +125,7 @@ var MapViewModel = function(map) {
 				content: "<div id='content'>" +
 						 "<h1 id='heading'>" + place.name + "</h1>" +
 						 "<div id='description'>Click the button for Yelp Reviews about " + place.name +
-						 "<br/><input type='image' src='images/yelp_review_btn_red.png' name='yelpReviews' id='yelpReviews'/>" +
+						 "<br><br><input type='image' src='images/yelp_review_btn_red.png' name='yelpReviews' id='yelpReviews'/>" +
 						 "</div>" + //#description ends here
 						 "</div>", //#content ends here
 				maxWidth: 300
