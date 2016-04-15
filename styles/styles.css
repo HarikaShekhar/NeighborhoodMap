@@ -55,7 +55,7 @@
 	font-size: 14px;
 	padding: 10px 10px 0 0;
 	height: 40px;
-	border-bottom: 1px solid grey;
+	border-bottom: 2px solid grey;
 }
 
 .highlight {
@@ -65,13 +65,13 @@
 
 #main {
     width: 100%;
-	position: absolute;
+	position: fixed;
 	border: 1px solid green;
 	background-color: yellow;
 }
 
 #wrapper.toggled #main {
-    position: absolute;
+    position: fixed;
     margin-right: -200px;
 }
 
@@ -114,6 +114,15 @@ h3 {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+}
+
+.loadingMessage {
+	font-size: 22px;
+}
+
+#content {
+	max-height: 400px;
+	overflow: contain;
 }
 
 @media(min-width: 768px) {

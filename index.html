@@ -43,19 +43,22 @@
 
 				<div class="row">
 					<div class="col-lg-12" id="mapHolder">
-						<div id="map"></div>
+						<div id="map">
+							<p class="loadingMessage text-center">Loading Google Maps ...</p>
+						</div>
 					</div>
 				</div>
-
-			</div>
-		</div>
+			</div> <!-- / .container-fluid -->
+		</div>  <!-- / #main -->
 	</div>
 
 	<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="scripts/libs/knockout-3.4.0.js" defer></script>
+	<script defer src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+	<script defer src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 	<script src="scripts/js/app.js" defer></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAsmUc_AC1I3AKp8VXJQBeDcFDqRcaxIE&callback=initializeMap"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAsmUc_AC1I3AKp8VXJQBeDcFDqRcaxIE&callback=initializeMap" onerror="googleErrorHandler()"></script>
     <script defer>
 	    $(".menuIcon").click(function(e) {
 	        e.preventDefault();
