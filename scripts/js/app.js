@@ -127,7 +127,7 @@ var places = {
 						   '<a href="' + business_url + '" target="_blank"><img src="images/yelp_review_btn_red.png"/></a>' +
 					   '</div>' + //#yelp ends here
 				   '</div>' + //#description ends here
-			   '</div>' //#content ends here
+			   '</div>'; //#content ends here
 	},
 	//this function handles errors when api call fails
 	"yelpErrorMessage": function(name){
@@ -137,7 +137,7 @@ var places = {
 					   '<p>Could not fetch information from Yelp for <em><b>' + name + '</b></em></p>' +
 					   '<p>Please check your internet connect and try again later.</p>' +
 				   '</div>' + //#description
-			   '</div>' //#content
+			   '</div>'; //#content
 	}
 
 };
@@ -322,7 +322,7 @@ var MapViewModel = function(map, infowindow) {
 			self.locations().push(place);
 		});
 
-		self.bounds = new google.maps.LatLngBounds();;
+		self.bounds = new google.maps.LatLngBounds();
 		self.locations().forEach(function(place){
 			self.bounds.extend(new google.maps.LatLng(place.coordinates));
 			place.clicked(false);
@@ -364,7 +364,7 @@ var MapViewModel = function(map, infowindow) {
 			}
 		});
 
-		if (selectedPlace.clicked() == true) {
+		if (selectedPlace.clicked() === true) {
 			selectedPlace.clicked(false);
 			selectedPlace.infowindow.close();
 		} else {
