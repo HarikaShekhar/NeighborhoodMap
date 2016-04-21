@@ -139,6 +139,16 @@ var places = {
 };
 
 var initializeMap = function() {
+    $(".menuIcon").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        $('input').focus();
+    });
+
+    $('button').click(function(){
+    	$('input').focus();
+    });
+
 	var map = new google.maps.Map(document.getElementById('map'), places.initialMap);
 	infoWindow = new google.maps.InfoWindow({
 			content: "",
