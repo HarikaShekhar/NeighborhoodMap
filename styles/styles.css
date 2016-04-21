@@ -53,7 +53,7 @@
 .place {
 	margin: 0;
 	font-size: 14px;
-	padding: 10px 10px 0 0;
+	padding: 7px 7px 0 0;
 	height: 40px;
 	border-bottom: 2px solid grey;
 }
@@ -66,8 +66,6 @@
 #main {
     width: 100%;
 	position: fixed;
-	border: 1px solid green;
-	background-color: yellow;
 }
 
 #wrapper.toggled #main {
@@ -99,8 +97,6 @@ h3 {
 
 #mapHolder {
 	position: fixed;
-	/*bottom: 0;*/
-	border: 2px solid red;
 	padding: 0;
 	margin: 0;
 	width: 100%;
@@ -108,7 +104,6 @@ h3 {
 }
 
 #map {
-	border: 2px solid blue;
 	position: absolute;
 	width: 100%;
 	height: 100%;

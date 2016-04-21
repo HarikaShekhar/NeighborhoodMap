@@ -17,7 +17,7 @@ var places = {
 				"lat": 37.397928,
 				"lng": -121.924195
 			},
-			"icon": "http://maps.google.com/mapfiles/kml/pal2/icon53.png",
+			"icon": "images/bank.png",
 			"category": "banks"
 		},
 		{
@@ -27,7 +27,7 @@ var places = {
 				"lat": 37.394924,
 				"lng": -121.947680
 			},
-			"icon": "http://maps.google.com/mapfiles/kml/pal3/icon18.png",
+			"icon": "images/groceries.png",
 			"category": "convenience"
 		},
 		{
@@ -37,7 +37,7 @@ var places = {
 				"lat": 37.421851,
 				"lng": -121.921750
 			},
-			"icon": "http://maps.google.com/mapfiles/kml/pal2/icon21.png",
+			"icon": "images/gas.png",
 			"category": "servicestations"
 		},
 		{
@@ -47,7 +47,7 @@ var places = {
 				"lat": 37.415980,
 				"lng": -121.897477
 			},
-			"icon": "http://maps.google.com/mapfiles/kml/pal3/icon21.png",
+			"icon": "images/mall.png",
 			"category": "shoppingcenters"
 		},
 		{
@@ -57,7 +57,7 @@ var places = {
 				"lat": 37.557640,
 				"lng": -121.976600
 			},
-			"icon": "http://maps.google.com/mapfiles/ms/micons/rail.png",
+			"icon": "images/bart.png",
 			"category": "publictransport"
 		},
 		{
@@ -67,8 +67,48 @@ var places = {
 				"lat": 37.400609,
 				"lng": -121.940208
 			},
-			"icon": "http://maps.google.com/mapfiles/ms/micons/tram.png",
+			"icon": "images/vta.png",
 			"category": "publictransport"
+		},
+		{
+			"address": "19980 E Homestead Rd, Cupertino, CA 95014",
+			"name": "Gochi Japanese Fusion",
+			"coordinates": {
+				"lat": 37.337084,
+				"lng": -122.022773
+			},
+			"icon": "images/food.png",
+			"category": "restaurants"
+		},
+		{
+			"address": "1701 Airport Blvd San Jose, CA 95110",
+			"name": "San Jose Airport",
+			"coordinates": {
+				"lat": 37.364186,
+				"lng": -121.928948
+			},
+			"icon": "images/airport.png",
+			"category": "airports"
+		},
+		{
+			"address": "McCarthy Ranch Marketplace, 182 Ranch Dr, Milpitas, CA 95035",
+			"name": "Banana Leaf",
+			"coordinates": {
+				"lat": 37.429166,
+				"lng": -121.920085
+			},
+			"icon": "images/food.png",
+			"category": "restaurants"
+		},
+		{
+			"address": "5237 Stevens Creek Blvd Santa Clara, CA 95051",
+			"name": "Chromatic Coffee",
+			"coordinates": {
+				"lat": 37.323991,
+				"lng": -121.994498
+			},
+			"icon": "images/coffee.png",
+			"category": "coffee"
 		}
 	],
 	"yelpSuccessMessage": function(name, addressLine1, addressLine2, rating_img_url, image_url, business_url){
@@ -318,14 +358,6 @@ var MapViewModel = function(map, infowindow) {
 	      selectedPlace.marker.setAnimation(null);
 	    });
 
-		selectedPlace.map.panTo({lat: selectedPlace.coordinates.lat + 0.05, lng: selectedPlace.coordinates.lng });
+		selectedPlace.map.panTo({lat: selectedPlace.coordinates.lat + 0.1, lng: selectedPlace.coordinates.lng });
 	};
 };
-
-
-// TODO
-// 1. Sort the list alphabetically -- done
-// 2. Small devices: Check the navbar
-// 5. autocomplete search
-// 6. Check flights API
-// 7. Add category for filter search
