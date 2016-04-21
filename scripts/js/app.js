@@ -1,6 +1,7 @@
 // data with location to be displayed on the map initially
 
 var places = {
+	//initial data for the map to display
 	"initialMap" : {
 		"center": {
 			"lat": 37.399072,
@@ -9,6 +10,7 @@ var places = {
 		"zoom": 11,
 		"mapTypeControl": false
 	},
+	//places to be displayed in the list view and on map
 	"mapPlaces": [
 		{
 			"address": "690 River Oaks Pkwy, Ste A, San Jose, CA 95134",
@@ -111,6 +113,7 @@ var places = {
 			"category": "coffee"
 		}
 	],
+	//yelpSuccessMessage() is called on successful ajax call
 	"yelpSuccessMessage": function(name, addressLine1, addressLine2, rating_img_url, image_url, business_url){
 		return '<div id="content">' +
 				   '<h2 id="heading">' + name + '</h2>' +
@@ -126,6 +129,7 @@ var places = {
 				   '</div>' + //#description ends here
 			   '</div>' //#content ends here
 	},
+	//this function handles errors when api call fails
 	"yelpErrorMessage": function(name){
 		return '<div id="content>' +
 				   '<h2 id="heading">' + name + '</h2>' +
@@ -138,6 +142,7 @@ var places = {
 
 };
 
+//initializeMap() initializes the map
 var initializeMap = function() {
     $(".menuIcon").click(function(e) {
         e.preventDefault();
@@ -157,6 +162,7 @@ var initializeMap = function() {
 	ko.applyBindings(new MapViewModel(map, infoWindow));
 };
 
+//error handler for google maps
 var googleErrorHandler = function(e){
 	$('#map').text('Woops! Could not load Google maps. Please check your internet connection and try again.');
 };
@@ -169,6 +175,7 @@ var MapViewModel = function(map, infowindow) {
 	self.locations = ko.observableArray([]);
 	self.markers = [];
 
+	//function to sort the list items alphabetically
 	self.compare = function(a,b) {
 	  if (a.name < b.name)
 	    return -1;
@@ -180,7 +187,7 @@ var MapViewModel = function(map, infowindow) {
 
 	places.mapPlaces.sort(self.compare);
 
-	// places.mapPlaces.sort();
+	// Add place objects to the obeservable array
 	places.mapPlaces.forEach(function(place) {
 		place.clicked = ko.observable(false);
 		self.locations().push(place);
@@ -188,31 +195,29 @@ var MapViewModel = function(map, infowindow) {
 
 	self.bounds = new google.maps.LatLngBounds();
 
-
+	//addMapMarkers() adds map markers to the map when called and sets the map bounds
 	self.addMapMarkers = function() {
 		self.locations().forEach(function(place) {
 			place.map = self.map;
 			place.infowindow = self.infowindow;
 			place.marker = new google.maps.Marker({
-				map: place.map,
+				map: place.map, //adds marker to the map
 				position: place.coordinates,
 				animation: google.maps.Animation.DROP,
 		        title: place.name,
-		        icon: place.icon
+		        icon: place.icon //adds an image icon to the marker
 			});
 
 			self.markers.push(place.marker);
 
+			//From Online Resume project
 		    // this is where the pin actually gets added to the map.
 		    // bounds.extend() takes in a map location object
 		    self.bounds.extend(new google.maps.LatLng(place.coordinates));
-		    // place.marker.setMap(place.map);
 
-		    // self.getYelpReviews(place);
-
+		    //calls displayPlaceInfo() when a marker is clicked
 	     	place.marker.addListener('click', function() {
 		        self.displayPlaceInfo(place);
-		        // place.infowindow.open(place.map, place.marker);
 		    });
 		});
 
@@ -222,6 +227,7 @@ var MapViewModel = function(map, infowindow) {
 	    self.map.setCenter(self.bounds.getCenter());
 	};
 
+	//this function calls the yelp API when the marker is clicked
 	self.getYelpReviews = function(place) {
 		//Fromt his useful link: https://github.com/levbrie/mighty_marks/blob/master/yelp-search-sample.html
     	var auth = {
@@ -273,7 +279,6 @@ var MapViewModel = function(map, infowindow) {
 			'timeout' : 2000,
 			error: function() {
 				place.infowindow.setContent(places.yelpErrorMessage(place.name));
-				// place.infowindow.open(place.map, place.marker);
 			}
 	    }).done(function(data){
 			// console.log(data);
@@ -284,12 +289,12 @@ var MapViewModel = function(map, infowindow) {
 				business_url = data.businesses[0].url;
 
 	    	place.infowindow.setContent(places.yelpSuccessMessage(place.name, addressLine1, addressLine2, rating_img_url, image_url, business_url));
-	    	// place.infowindow.open(place.map, place.marker);
 	    });
 	}; //getYelpReviews()
 
 	self.addMapMarkers();
 
+	//filterPlaces() filters the list view and markers dynamically. This function filters the places based on name or category of the place.
 	self.filterPlaces = function(value) {
 		self.locations.removeAll();
 		self.markers.forEach(function(marker){
@@ -310,6 +315,7 @@ var MapViewModel = function(map, infowindow) {
 
 	self.inputString.subscribe(self.filterPlaces);
 
+	//this function refreshes the application to the initial stage.
 	self.resetFilter = function() {
 		self.inputString('');
 		places.mapPlaces.forEach(function(place) {
@@ -330,6 +336,7 @@ var MapViewModel = function(map, infowindow) {
 	    self.map.setCenter(self.bounds.getCenter());
 	};
 
+	//toggles the animation on markers
 	self.toggleBounce = function(marker) {
 	    if (marker.getAnimation() !== null) {
 	    	marker.setAnimation(null);
@@ -338,6 +345,8 @@ var MapViewModel = function(map, infowindow) {
 	  	}
 	};
 
+	//this function fetches yelp reviews for each marker when clicked, handles animation, sets info window content, highlights
+	//list view places on selection
 	self.displayPlaceInfo = function(selectedPlace) {
 		self.getYelpReviews(selectedPlace);
 		self.markers.forEach(function(marker){
