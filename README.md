@@ -11,6 +11,10 @@ View the project here:
 
 http://harikashekhar.github.io/NeighborhoodMap
 
+filter categories: banks, coffee, restaurants, shoppingcenters, convenience, servicestations, public transports and airports
+
+Responsive: works well on small screens too.
+
 Files:
 ------
 
