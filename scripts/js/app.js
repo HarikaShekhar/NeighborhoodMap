@@ -159,7 +159,7 @@ var initializeMap = function() {
 			content: "",
 			maxWidth: 250
 	});
-	ko.applyBindings(new MapViewModel(map, infoWindow));
+	ko.applyBindings(new MapViewModel(map));
 };
 
 //error handler for google maps
@@ -167,10 +167,9 @@ var googleErrorHandler = function(e){
 	$('#map').text('Woops! Could not load Google maps. Please check your internet connection and try again.');
 };
 
-var MapViewModel = function(map, infowindow) {
+var MapViewModel = function(map) {
 	var self = this;
 	self.map = map;
-	self.infowindow = infowindow;
 	self.inputString = ko.observable('');
 	self.locations = ko.observableArray([]);
 	self.markers = [];
@@ -199,7 +198,6 @@ var MapViewModel = function(map, infowindow) {
 	self.addMapMarkers = function() {
 		self.locations().forEach(function(place) {
 			place.map = self.map;
-			place.infowindow = self.infowindow;
 			place.marker = new google.maps.Marker({
 				map: place.map, //adds marker to the map
 				position: place.coordinates,
@@ -208,6 +206,7 @@ var MapViewModel = function(map, infowindow) {
 		        icon: place.icon //adds an image icon to the marker
 			});
 
+			self.getYelpReviews(place);
 			self.markers.push(place.marker);
 
 			//From Online Resume project
@@ -278,7 +277,11 @@ var MapViewModel = function(map, infowindow) {
 			//using timeout to force error handling - may need to tweak this for mobile use.
 			'timeout' : 2000,
 			error: function() {
-				place.infowindow.setContent(places.yelpErrorMessage(place.name));
+				// place.infowindow.setContent(places.yelpErrorMessage(place.name));
+		    	var infoHTML = places.yelpErrorMessage(place.name);
+	    	    place.infowindow = new google.maps.InfoWindow({
+			      content: infoHTML
+			    });
 			}
 	    }).done(function(data){
 			// console.log(data);
@@ -288,7 +291,11 @@ var MapViewModel = function(map, infowindow) {
 				image_url = data.businesses[0].image_url,
 				business_url = data.businesses[0].url;
 
-	    	place.infowindow.setContent(places.yelpSuccessMessage(place.name, addressLine1, addressLine2, rating_img_url, image_url, business_url));
+	    	// place.infowindow.setContent(places.yelpSuccessMessage(place.name, addressLine1, addressLine2, rating_img_url, image_url, business_url));
+	    	var infoHTML = places.yelpSuccessMessage(place.name, addressLine1, addressLine2, rating_img_url, image_url, business_url);
+	    	    place.infowindow = new google.maps.InfoWindow({
+			      content: infoHTML
+			    });
 	    });
 	}; //getYelpReviews()
 
@@ -348,7 +355,7 @@ var MapViewModel = function(map, infowindow) {
 	//this function fetches yelp reviews for each marker when clicked, handles animation, sets info window content, highlights
 	//list view places on selection
 	self.displayPlaceInfo = function(selectedPlace) {
-		self.getYelpReviews(selectedPlace);
+		// self.getYelpReviews(selectedPlace);
 		self.markers.forEach(function(marker){
 			if (marker != selectedPlace.marker) {
 				marker.setAnimation(null);
