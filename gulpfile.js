@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 
 //Paths
 var paths = {
-    "all": "dist/*",
+    "all": "dist",
     "build": "dist/",
     "html": {
         "source": "*.html",
