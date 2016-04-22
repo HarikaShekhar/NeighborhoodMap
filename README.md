@@ -7,6 +7,10 @@ About Project:
 This is a project about few places in my neighborhood. It shows a google map with markers for these places, a list view of these places and a search bar for filtering places.
 The Infowindow of each place displays its customer ratings and a link to its Yelp page.
 
+View the project here:
+
+http://harikashekhar.github.io/NeighborhoodMap
+
 Files:
 ------
 
