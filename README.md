@@ -15,6 +15,67 @@ filter categories: banks, coffee, restaurants, shoppingcenters, convenience, ser
 
 Responsive: works well on small screens too.
 
+Getting started - How to use the app:
+------------------------------------
+
+1. Check out the repository or download the repository to local machine.
+2. Open Terminal, navigate to Project folder and run 'gulp' command.
+   This will fetch all the dependencies listed in package.json file and create a 'dist' folder with the all project files.
+3. To run a local server, Navigate to 'dist'and run the following command.
+
+	$> cd /path/to/your-project-folder
+  	$> python -m SimpleHTTPServer 8080
+
+4. Download and install [ngrok](https://ngrok.com/) to make the local server accessible remotely.
+
+   	Navigate to 'dist' folder and run the ngrok command as below.
+
+   	``` bash
+  	$> cd /path/to/your-project-folder
+  	$> ngrok http 8080
+
+  	Copy the public URL ngrok gives you and paste it in a browser to view the project page!
+
+5. Alternatively, view the Project Page here:
+
+	http://harikashekhar.github.io/NeighborhoodMap
+6. Using the app:
+   --------------
+
+	Toggle button:
+	--------------
+
+		Click the toggle button to toggle the list view and search/filter bar.
+
+	Filtering:
+	----------
+
+		Search for a place in the list by name or category.
+		Places matching the search text will be filtered on map and in the list.
+
+	Reset:
+	------
+
+		Click reset button to reset the map to show all places in the list and on map.
+
+	List:
+	-----
+
+		Click a Place in the list to show it on map - opens Infowindow to show details about he place.
+		Additionally, click the 'reviews by yelp'	button for Yelp page about the selected place.
+		Clicking a place from the list:
+
+			highlights it in the list view by changing the background color and by bouncing the marker on map.
+
+	Map Marker:
+	-----------
+
+		Click a marker on map to show it on map - opens Infowindow to show details about he place.
+		Additionally, click the 'reviews by yelp'	button for Yelp page about the selected place.
+		Clicking a marker on the map:
+
+			highlights it in the list view by changing the background color and by bouncing the marker on map.
+
 Files:
 ------
 
