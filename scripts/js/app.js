@@ -143,12 +143,6 @@ var places = {
 
 //initializeMap() initializes the map
 var initializeMap = function() {
-    $(".menuIcon").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        $('input').focus();
-    });
-
     $('button').click(function(){
     	$('input').focus();
     });
@@ -172,6 +166,7 @@ var MapViewModel = function(map) {
 	self.map = map;
 	self.inputString = ko.observable('');
 	self.locations = ko.observableArray([]);
+	self.toggled = ko.observable(false);
 	self.markers = [];
 
 	//function to sort the list items alphabetically
@@ -385,5 +380,15 @@ var MapViewModel = function(map) {
 	    });
 
 		selectedPlace.map.panTo({lat: selectedPlace.coordinates.lat + 0.1, lng: selectedPlace.coordinates.lng });
+	};
+
+	self.toggleListView =function() {
+		if (self.toggled() === true){
+			self.toggled(false);
+		}
+		else {
+			self.toggled(true);
+		}
+		$('input').focus();
 	};
 };

@@ -23,7 +23,7 @@
 
 </head>
 <body>
-	<div id="wrapper">
+	<div id="wrapper" data-bind="css: { toggled: toggled }">
 		<!-- sidebar -->
 		<div id="sidebarWrapper">
 			<div class="sidebarContainer">
@@ -45,7 +45,7 @@
 				<div class="row">
 					<div class="menuIconContainer col-lg-12">
 				    	<!-- http://webdesign.tutsplus.com/tutorials/7-non-raster-approaches-for-making-the-hamburger-menu-icon--cms-21686 -->
-				    	<span class="menuIcon">☰</span>
+				    	<span class="menuIcon" data-bind="click: toggleListView">☰</span>
 				    	<h3 class="text-center mainTitle">Neighborhood Map - San Jose, California</h3>
 				    </div>
 				</div>
